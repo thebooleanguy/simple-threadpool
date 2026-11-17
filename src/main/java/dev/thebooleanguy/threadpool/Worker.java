@@ -7,6 +7,7 @@ public class Worker implements Runnable {
 
     public Worker(BlockingQueue<Runnable> taskQueue) {
         this.taskQueue = taskQueue;
+
     }
 
     @Override
@@ -21,11 +22,11 @@ public class Worker implements Runnable {
                 return;
             }
             try {
+
                 task.run();
             } catch (RuntimeException e) {
                 System.err.println(e.getMessage());
             }
         }
     }
-
 }

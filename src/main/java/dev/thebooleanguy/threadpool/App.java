@@ -11,8 +11,11 @@ public class App {
             taskQueue.add(new Task());
         }
 
-        Thread workerThread = new Thread(new Worker(taskQueue));
-        workerThread.start();
-
+        Thread workerThreadA = new Thread(new Worker(taskQueue));
+        Thread workerThreadB = new Thread(new Worker(taskQueue));
+        Thread workerThreadC = new Thread(new Worker(taskQueue));
+        workerThreadA.start();
+        workerThreadB.start();
+        workerThreadC.start();
     }
 }
