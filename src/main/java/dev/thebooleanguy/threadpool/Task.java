@@ -9,13 +9,6 @@ public class Task implements Runnable {
         double taskNo = Math.floor(Math.random() * (100 - 0 + 1));
         String workerName = Thread.currentThread().getName();
 
-        if (taskNo % 2 == 0) {
-            throw new RuntimeException("Task " + taskNo + " failed to run on " +
-                    workerName);
-        } else {
-            System.out.println("Task " + taskNo + " running on " + workerName);
-        }
-
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -23,5 +16,11 @@ public class Task implements Runnable {
             Thread.currentThread().interrupt();
         }
 
+        if (taskNo % 2 == 0) {
+            throw new RuntimeException("Task " + taskNo + " failed to run on " +
+                    workerName);
+        } else {
+            System.out.println("Task " + taskNo + " running on " + workerName);
+        }
     }
 }
