@@ -4,10 +4,11 @@ import java.util.concurrent.BlockingQueue;
 
 public class Worker implements Runnable {
     private final BlockingQueue<Runnable> taskQueue;
+    private final PoolStateHolder poolStateHolder;
 
-    public Worker(BlockingQueue<Runnable> taskQueue) {
+    public Worker(BlockingQueue<Runnable> taskQueue, PoolStateHolder poolStateHolder) {
         this.taskQueue = taskQueue;
-
+        this.poolStateHolder = poolStateHolder;
     }
 
     @Override
