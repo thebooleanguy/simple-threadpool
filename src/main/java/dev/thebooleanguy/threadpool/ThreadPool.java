@@ -39,6 +39,10 @@ public class ThreadPool {
     }
 
     public boolean awaitTermination(long time, TimeUnit unit) throws InterruptedException {
+        if (time < 0) {
+            throw new IllegalArgumentException("Negative timeout supplied by the caller");
+        }
+
         synchronized (lock) {
             if (poolStateHolder.getState() == PoolState.RUNNING) {
                 return false;
@@ -54,8 +58,11 @@ public class ThreadPool {
                 }
             }
         } else {
-            long remainingTime = unit.toNanos(time);
+            long deadline = System.nanoTime() + unit.toNanos(time);
+            long remainingTime = deadline - System.nanoTime();
+
             for (int i = 0; i < workers.length; i++) {
+
                 if (remainingTime <= 0) {
                     return false;
                 }
@@ -63,16 +70,13 @@ public class ThreadPool {
                 long millis = remainingTime / 1_000_000;
                 long fractionalNanos = remainingTime % 1_000_000;
 
-                long startTime = System.nanoTime();
-
                 workers[i].join(millis, (int) fractionalNanos);
 
                 if (workers[i].isAlive()) {
                     return false;
                 }
 
-                long elapsedTime = System.nanoTime() - startTime;
-                remainingTime -= elapsedTime;
+                remainingTime = deadline - System.nanoTime();
             }
         }
 
