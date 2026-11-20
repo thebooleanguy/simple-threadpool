@@ -2,6 +2,7 @@ package dev.thebooleanguy.threadpool;
 
 import java.util.concurrent.TimeUnit;
 
+// An entry-point for demonstration purposes
 public class App {
     public static void main(String[] args) {
         ThreadPool threadPool = new ThreadPool(10, 3);

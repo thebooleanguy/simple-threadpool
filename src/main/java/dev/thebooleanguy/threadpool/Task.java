@@ -2,6 +2,7 @@ package dev.thebooleanguy.threadpool;
 
 import java.lang.Math;
 
+// A demo task which is just a runnable
 public class Task implements Runnable {
 
     @Override
