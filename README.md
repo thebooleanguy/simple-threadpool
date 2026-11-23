@@ -44,3 +44,5 @@ mvn test
 ```
 
 The tests cover concurrent execution, queue capacity, shutdown behavior, and worker recovery after a task throws a runtime exception.
+
+The benchmark in `src/main/java/dev/thebooleanguy/threadpool/ThreadPoolBenchmark.java` was made by GitHub Copilot.
